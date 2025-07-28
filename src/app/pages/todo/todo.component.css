@@ -1,0 +1,29 @@
+.todo-container {
+    max-width: 400px;
+    margin: 50px auto;
+    text-align: center;
+  }
+  input {
+    padding: 8px;
+    width: 70%;
+  }
+  button {
+    padding: 8px;
+    margin-left: 5px;
+  }
+
+  button:disabled,
+  input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  li {
+    margin-top: 10px;
+    text-align: left;
+  }
+  
