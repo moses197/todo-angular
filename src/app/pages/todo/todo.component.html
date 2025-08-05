@@ -1,4 +1,4 @@
-<div class="todo-container">
+<!-- <div class="todo-container">
     <h2>Todo App</h2>
   
     <input
@@ -11,8 +11,51 @@
   
     <ul>
       <li *ngFor="let todo of todos; let i = index">
-        {{ todo.title }}
-        <button (click)="removeTodo(todo.id, i)">❌</button>
+        <div *ngIf="!todo.editing">
+          {{ todo.title }}
+          <button (click)="startEditing(i)">✏️ Edit</button>
+          <button (click)="removeTodo(todo.id, i)">❌</button>
+        </div>
+
+        <div *ngIf="todo.editing">
+          <input
+            [(ngModel)]="todo.title"
+            (keyup.enter)="updateTodo(todo, i)"
+          />
+          <button (click)="updateTodo(todo, i)">✔️ Save</button>
+          <button (click)="cancelEdit(todo)">❌ Cancel</button>
+        </div>
+      </li>
+    </ul>
+</div>
+   -->
+
+
+   <div class="todo-container">
+    <h2>Todo App</h2>
+  
+    <input
+      [(ngModel)]="newTodo"
+      placeholder="Enter a new task"
+      (keyup.enter)="addTodo()"
+    />
+    <button (click)="addTodo()">Add</button>
+  
+    <ul>
+      <li *ngFor="let todo of todos; let i = index">
+        <!-- View Mode -->
+        <div *ngIf="!todo.editing">
+          {{ todo.title }}
+          <button (click)="startEditing(todo)">✏️ Edit</button>
+          <button (click)="removeTodo(todo.id, i)">❌ Delete</button>
+        </div>
+  
+        <!-- Edit Mode -->
+        <div *ngIf="todo.editing">
+          <input [(ngModel)]="todo.title" />
+          <button (click)="saveTodo(todo)">💾 Save</button>
+          <button (click)="cancelEdit(todo)">❌ Cancel</button>
+        </div>
       </li>
     </ul>
   </div>

@@ -65,4 +65,26 @@ export class TodoComponent {
       }
     })
   }
+
+startEditing(todo: Todo) {
+  todo.originalTitle = todo.title;
+  todo.editing = true;
+}
+
+saveTodo(todo: Todo) {
+  this.todoService.updateTodo(todo.id, { title: todo.title }).subscribe({
+    next: (updated: Todo) => {
+      todo.editing = false;
+    },
+    error: (error) => {
+      console.error('Error updating todo:', error);
+    }
+  });
+}
+
+cancelEdit(todo: Todo) {
+  todo.title = todo.originalTitle ?? todo.title;
+  todo.editing = false;
+}
+
 }
